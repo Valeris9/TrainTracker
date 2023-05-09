@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.traintrack.Actividad.ActivityView
 import com.example.traintrack.Inicio.LogoAndButtonsScreen
 import com.example.traintrack.Perfil.ProfileView
 import com.example.traintrack.Registro.RegisterScreen
@@ -26,7 +27,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    ProfileView("Victor",21,10,76.3f,"20/05/2023")
+                    //ProfileView("Victor",21,10,76.3f,"20/05/2023")
+                    ActivityView(caloriesBurned = 200, heartRate = 65, averagePace ="5.3 km/h" , distance = 33.3f )
                 }
             }
         }
