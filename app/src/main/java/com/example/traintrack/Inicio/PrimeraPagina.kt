@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import com.example.traintrack.R
 
 @Composable
-fun LogoAndButtonsScreen() {
+fun StartScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
