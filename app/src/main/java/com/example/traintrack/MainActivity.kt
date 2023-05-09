@@ -12,11 +12,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.traintrack.Actividad.ActivityView
+import com.example.traintrack.Historial.Activity
+import com.example.traintrack.Historial.HistoryView
 import com.example.traintrack.Inicio.StartScreen
 import com.example.traintrack.PaginaPrincipal.HomePage
 import com.example.traintrack.Perfil.ProfileView
 import com.example.traintrack.Registro.RegisterScreen
 import com.example.traintrack.ui.theme.TrainTrackTheme
+import java.time.LocalDateTime
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +36,19 @@ class MainActivity : ComponentActivity() {
                     //RegisterScreen()
                     //LoginScreen()
                     //StartScreen()
-                    HomePage()
+                    //HomePage()
+
+                    val activities = listOf(
+                        Activity(1, "Actividad 1", LocalDateTime.now()),
+                        Activity(2, "Actividad 2", LocalDateTime.now().minusDays(1)),
+                        Activity(3, "Actividad 3", LocalDateTime.now().minusDays(2))
+                    )
+
+                    HistoryView(activities = activities)
+
+
+
+
 
                 }
             }
