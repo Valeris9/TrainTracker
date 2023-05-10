@@ -13,7 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ProfileView(name: String, age: Int, exercises: Int, weight: Float, registrationDate: String) {
+fun ProfileView(name: String, age: Int, exercises: Int,height: Float ,weight: Float, registrationDate: String) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -24,6 +24,7 @@ fun ProfileView(name: String, age: Int, exercises: Int, weight: Float, registrat
         Text(text = "Nombre: $name")
         Text(text = "Edad: $age")
         Text(text = "Ejercicios realizados: $exercises")
+        Text(text = "Altura: $height m" )
         Text(text = "Peso: $weight kg")
         Text(text = "Fecha de registro: $registrationDate")
 

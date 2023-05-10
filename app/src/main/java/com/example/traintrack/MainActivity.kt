@@ -31,12 +31,13 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    //ProfileView("Victor",21,10,76.3f,"20/05/2023")
+                    //ProfileView("Victor",21,10,1.81f,76.3f,"20/05/2023")
                     //ActivityView(caloriesBurned = 200, heartRate = 65, averagePace ="5.3 km/h" , distance = 33.3f )
                     //RegisterScreen()
                     //LoginScreen()
                     //StartScreen()
                     //HomePage()
+
 
                     val activities = listOf(
                         Activity(1, "Actividad 1", LocalDateTime.now()),
@@ -45,7 +46,6 @@ class MainActivity : ComponentActivity() {
                     )
 
                     HistoryView(activities = activities)
-
 
 
 
