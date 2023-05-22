@@ -36,16 +36,16 @@ class MainActivity : ComponentActivity() {
                     //RegisterScreen()
                     //LoginScreen()
                     //StartScreen()
-                    //HomePage()
+                    HomePage()
 
 
-                    val activities = listOf(
+                   /*¡ val activities = listOf(
                         Activity(1, "Actividad 1", LocalDateTime.now()),
                         Activity(2, "Actividad 2", LocalDateTime.now().minusDays(1)),
                         Activity(3, "Actividad 3", LocalDateTime.now().minusDays(2))
                     )
 
-                    HistoryView(activities = activities)
+                    HistoryView(activities = activities)*/
 
 
 
