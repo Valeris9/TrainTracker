@@ -70,7 +70,9 @@ fun HomePage(navController: NavController) {
                 Text(
                     text = "Abrir Google Maps",
                     style = MaterialTheme.typography.titleLarge,
-                    modifier = Modifier.clickable(onClick = { /*TODO*/ })
+                    modifier = Modifier.clickable(onClick = {
+                        navController.navigate("map")
+                    })
                 )
             }
         }

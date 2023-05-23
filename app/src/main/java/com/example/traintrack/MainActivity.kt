@@ -20,8 +20,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.traintrack.PaginaPrincipal.HomePage
+import com.example.traintrack.PaginaPrincipal.MapScreen
 
 class MainActivity : ComponentActivity() {
+    private val locationPermissionCode = 1
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +38,7 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+
     }
 }
 
@@ -46,5 +50,6 @@ fun TrainTracker() {
     NavHost(navController = navController, startDestination = "login") {
         composable("login") { LoginScreen(navController, LoginScreenViewModel()) }
         composable("homepage"){ HomePage(navController)}
+        composable("map"){ MapScreen()}
     }
 }
