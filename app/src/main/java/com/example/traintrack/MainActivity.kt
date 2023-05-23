@@ -1,55 +1,89 @@
 package com.example.traintrack
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.RequiresApi
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.example.traintrack.ui.theme.TrainTrackTheme
-import java.time.LocalDateTime
 import com.example.traintrack.Registro.LoginScreen
 import com.example.traintrack.Registro.LoginScreenViewModel
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 
-import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.traintrack.PaginaPrincipal.HomePage
 import com.example.traintrack.PaginaPrincipal.MapScreen
 
+
 class MainActivity : ComponentActivity() {
-    private val locationPermissionCode = 1
 
+    companion object {
+        private const val REQUEST_CODE_ACTIVITY_RECOGNITION = 1001
+        private val LOCATION_PERMISSION_REQUEST_CODE = 1002
 
+    }
+
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            TrainTrackTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    TrainTracker()
+
+        val activitypermission = Manifest.permission.ACTIVITY_RECOGNITION
+        val locationPermission = Manifest.permission.ACCESS_FINE_LOCATION
+
+        val activityRecognitionPermission =
+            ContextCompat.checkSelfPermission(
+                this,
+                activitypermission
+            ) == PackageManager.PERMISSION_GRANTED
+
+        val locationPermissionGranted =
+            ContextCompat.checkSelfPermission(
+                this,
+                locationPermission
+            ) == PackageManager.PERMISSION_GRANTED
+        if (!activityRecognitionPermission) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(arrayOf(activityRecognitionPermission).toString()),
+                REQUEST_CODE_ACTIVITY_RECOGNITION
+            )
+        } else if (!locationPermissionGranted) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(locationPermission),
+                LOCATION_PERMISSION_REQUEST_CODE
+            )
+        } else {
+            setContent {
+                TrainTrackTheme {
+                    Surface(
+                        modifier = Modifier.fillMaxSize(),
+                        color = MaterialTheme.colorScheme.background
+                    ) {
+                        TrainTracker()
+                    }
                 }
             }
         }
-
     }
 }
-
-
-
 @Composable
 fun TrainTracker() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "login") {
         composable("login") { LoginScreen(navController, LoginScreenViewModel()) }
-        composable("homepage"){ HomePage(navController)}
-        composable("map"){ MapScreen()}
+        composable("homepage") { HomePage(navController) }
+        composable("map") { MapScreen() }
     }
 }
