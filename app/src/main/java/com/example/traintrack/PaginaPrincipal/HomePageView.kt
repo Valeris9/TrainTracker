@@ -18,11 +18,12 @@ import androidx.compose.ui.graphics.drawscope.*
 import androidx.compose.ui.text.font.*
 import androidx.compose.ui.unit.*
 import androidx.compose.ui.res.stringResource
+import androidx.navigation.NavController
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomePage() {
+fun HomePage(navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(

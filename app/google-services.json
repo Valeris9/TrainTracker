@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "717556830084",
+    "project_id": "stellar-polymer-384810",
+    "storage_bucket": "stellar-polymer-384810.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:717556830084:android:a3add9aee513e005e2d7d1",
+        "android_client_info": {
+          "package_name": "com.example.traintrack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "717556830084-r16kcnvk7vr1cmh78flqigi2rhih872f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.traintrack",
+            "certificate_hash": "807dca66145f9e09dd80ce263a7cdeca8ded2d5a"
+          }
+        },
+        {
+          "client_id": "717556830084-88psc6uq5oc9l7vcs95od7vh3vo10i3s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnE9WXsPxHBpMvBosWIPCYJmAhlePIvNA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "717556830084-88psc6uq5oc9l7vcs95od7vh3vo10i3s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
