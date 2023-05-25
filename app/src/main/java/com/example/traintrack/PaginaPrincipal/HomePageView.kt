@@ -39,7 +39,7 @@ fun HomePage(navController: NavController) {
                 verticalArrangement = Arrangement.Center
             ) {
                 Button(
-                    onClick = { /*TODO*/ },
+                    onClick = {navController.navigate("perfil")},
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(100.dp),

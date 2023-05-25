@@ -66,25 +66,5 @@ fun ActivityView(caloriesBurned: Int, heartRate: Int, averagePace: String, dista
         }
 
     }
-    Box(
-        modifier = Modifier
-            .padding(16.dp)
-            .fillMaxHeight()
-            .aspectRatio(1.1f)
-    ) {
-        Canvas(modifier = Modifier.fillMaxSize()) {
-            drawRect(
-                color = Color.LightGray,
-                size = size,
-                style = Stroke(width = 2.dp.toPx())
-            )
 
-            // Dibujamos un cuadrado rojo en el centro
-            drawRect(
-                color = Color.Red,
-                topLeft = Offset(size.width / 2 - 25.dp.toPx(), size.height / 2 - 25.dp.toPx()),
-                size = androidx.compose.ui.geometry.Size(50.dp.toPx(), 50.dp.toPx())
-            )
-        }
-    }
 }

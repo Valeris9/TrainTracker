@@ -80,6 +80,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation platform('com.google.firebase:firebase-bom:31.5.0')
     implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.firebase:firebase-database-ktx'
     implementation 'com.google.android.gms:play-services-auth:20.5.0'
 
     implementation("com.google.android.gms:play-services-fitness:21.1.0")
@@ -88,6 +89,12 @@ dependencies {
     //Maps:
     implementation 'com.google.maps.android:maps-compose:2.11.0'
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
+
+    //Time
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.android.volley:volley:1.2.1'
+
 
 
 }

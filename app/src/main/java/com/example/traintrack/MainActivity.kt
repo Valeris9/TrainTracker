@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.provider.ContactsContract.Profile
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
@@ -24,6 +25,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.traintrack.PaginaPrincipal.HomePage
 import com.example.traintrack.PaginaPrincipal.MapScreen
+import com.example.traintrack.Perfil.PerfilViewModel
+import com.example.traintrack.Perfil.ProfileView
+import com.google.firebase.FirebaseApp
+
+//import com.example.traintrack.Weather.WeatherScreen
 
 
 class MainActivity : ComponentActivity() {
@@ -37,7 +43,7 @@ class MainActivity : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        FirebaseApp.initializeApp(this)
         val activitypermission = Manifest.permission.ACTIVITY_RECOGNITION
         val locationPermission = Manifest.permission.ACCESS_FINE_LOCATION
 
@@ -85,5 +91,10 @@ fun TrainTracker() {
         composable("login") { LoginScreen(navController, LoginScreenViewModel()) }
         composable("homepage") { HomePage(navController) }
         composable("map") { MapScreen() }
+        composable("perfil"){ ProfileView(
+            perfilViewModel = PerfilViewModel(),
+            navController
+        )}
+        //composable("weather"){ WeatherScreen(navController)}
     }
 }
