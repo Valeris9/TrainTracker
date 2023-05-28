@@ -6,10 +6,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.getValue
-import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.flow.callbackFlow
-import java.util.concurrent.Flow
 
 class DatabaseReference {
 
@@ -28,22 +24,21 @@ class DatabaseReference {
             }
     }
 
-        fun obtenerPerfil(userId: String) = callbackFlow<HashMap<String, Any>?> {
-            val perfilRef = reference.child("perfiles").child(userId)
-            val listener = object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val perfilData = snapshot.getValue<HashMap<String, Any>>()
-                    trySend(perfilData).isSuccess
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    trySend(null).isSuccess
-                }
+    fun obtenerPerfil(userId: String, onComplete: (HashMap<String, Any>?) -> Unit) {
+        val perfilRef = reference.child("perfiles").child(userId)
+        perfilRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val perfilData = snapshot.value as? HashMap<String, Any>
+                onComplete(perfilData)
             }
 
-            perfilRef.addListenerForSingleValueEvent(listener)
+            override fun onCancelled(error: DatabaseError) {
+                // Manejar el error en caso de que ocurra
+                Log.d("-1", "Error obtener perfil: ${error.message}")
+                onComplete(null)
+            }
+        })
+    }
 
-            awaitClose { perfilRef.removeEventListener(listener) }
-        }
 
 }

@@ -22,11 +22,11 @@ fun ProfileView(
     perfilViewModel: PerfilViewModel,
     navController: NavController
 ) {
-   LaunchedEffect(Unit){
-       perfilViewModel.obtenerPerfil()
-   }
-
     val perfilData by perfilViewModel.perfilData.collectAsState()
+
+    perfilViewModel.obtenerPerfil()
+
+
 
     Column(
         modifier = Modifier
@@ -35,16 +35,18 @@ fun ProfileView(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        perfilData?.let { perfil ->
-            Text(text = "Nombre: ${perfil["nombre"]}")
-            Text(text = "Edad: ${perfil["edad"]}")
-            Text(text = "Altura: ${perfil["altura"]} m")
-            Text(text = "Peso: ${perfil["peso"]} kg")
+        if (perfilData != null) {
+            Text(text = "Nombre: ${perfilData!!["nombre"]}")
+            Text(text = "Edad: ${perfilData!!["edad"]}")
+            Text(text = "Altura: ${perfilData!!["altura"]} m")
+            Text(text = "Peso: ${perfilData!!["peso"]} kg")
         }
 
 
+        Spacer(modifier = Modifier.height(50.dp))
         // Formulario para editar el perfil
-        ProfileForm(viewModel = perfilViewModel)
+        Text(text = "Modificar Perfil: ")
+        ProfileForm(viewModel = perfilViewModel, navController)
 
         Button(
             onClick = { navController.navigate("weather") },

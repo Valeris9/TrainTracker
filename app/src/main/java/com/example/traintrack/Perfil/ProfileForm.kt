@@ -12,10 +12,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.navigation.NavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProfileForm (viewModel: PerfilViewModel) {
+fun ProfileForm (viewModel: PerfilViewModel, navController :NavController) {
     // Campos del formulario
     var nombre by remember { mutableStateOf("") }
     var altura by remember { mutableStateOf("") }
@@ -68,6 +69,9 @@ fun ProfileForm (viewModel: PerfilViewModel) {
 
                 // Guardar el perfil en la base de datos
                 viewModel.guardarPerfil()
+
+                //Actualizar vista
+                navController.navigate("perfil")
             }
         ) {
             Text("Guardar")
