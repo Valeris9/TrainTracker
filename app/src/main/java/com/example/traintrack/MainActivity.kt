@@ -44,33 +44,6 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         FirebaseApp.initializeApp(this)
-        val activitypermission = Manifest.permission.ACTIVITY_RECOGNITION
-        val locationPermission = Manifest.permission.ACCESS_FINE_LOCATION
-
-        val activityRecognitionPermission =
-            ContextCompat.checkSelfPermission(
-                this,
-                activitypermission
-            ) == PackageManager.PERMISSION_GRANTED
-
-        val locationPermissionGranted =
-            ContextCompat.checkSelfPermission(
-                this,
-                locationPermission
-            ) == PackageManager.PERMISSION_GRANTED
-        if (!activityRecognitionPermission) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(arrayOf(activityRecognitionPermission).toString()),
-                REQUEST_CODE_ACTIVITY_RECOGNITION
-            )
-        } else if (!locationPermissionGranted) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(locationPermission),
-                LOCATION_PERMISSION_REQUEST_CODE
-            )
-        } else {
             setContent {
                 TrainTrackTheme {
                     Surface(
@@ -81,7 +54,7 @@ class MainActivity : ComponentActivity() {
                     }
                 }
             }
-        }
+
     }
 }
 @Composable
