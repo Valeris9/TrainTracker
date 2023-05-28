@@ -48,6 +48,7 @@ class PerfilViewModel : ViewModel() {
         }
     }
 
+    // Método para obtener los datos del perfil desde la base de datos
     fun obtenerPerfil() {
         currentUser?.let { user ->
             val userId = user.uid

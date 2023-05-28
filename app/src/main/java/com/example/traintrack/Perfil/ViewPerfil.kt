@@ -22,8 +22,10 @@ fun ProfileView(
     perfilViewModel: PerfilViewModel,
     navController: NavController
 ) {
+    // Recopilar el estado del perfilData del PerfilViewModel
     val perfilData by perfilViewModel.perfilData.collectAsState()
 
+    // Obtener el perfil al cargar la vista
     perfilViewModel.obtenerPerfil()
 
 
@@ -35,6 +37,7 @@ fun ProfileView(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        // Mostrar los datos del perfil si están disponibles
         if (perfilData != null) {
             Text(text = "Nombre: ${perfilData!!["nombre"]}")
             Text(text = "Edad: ${perfilData!!["edad"]}")
@@ -44,6 +47,8 @@ fun ProfileView(
 
 
         Spacer(modifier = Modifier.height(50.dp))
+
+
         // Formulario para editar el perfil
         Text(text = "Modificar Perfil: ")
         ProfileForm(viewModel = perfilViewModel, navController)

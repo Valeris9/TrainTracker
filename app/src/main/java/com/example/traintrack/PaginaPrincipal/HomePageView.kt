@@ -24,6 +24,7 @@ import androidx.navigation.NavController
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomePage(navController: NavController) {
+    // Definición de la pantalla principal utilizando el componente Scaffold de Jetpack Compose
     Scaffold(
         topBar = {
             TopAppBar(
@@ -38,6 +39,7 @@ fun HomePage(navController: NavController) {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
+                // Botón para navegar a la pantalla de perfil
                 Button(
                     onClick = {navController.navigate("perfil")},
                     modifier = Modifier
@@ -49,6 +51,7 @@ fun HomePage(navController: NavController) {
                         )
                 }
                 Spacer(modifier = Modifier.height(16.dp))
+                // Botón para mostrar el historial
                 Button(
                     onClick = { /*TODO*/ },
                     modifier = Modifier
@@ -57,6 +60,7 @@ fun HomePage(navController: NavController) {
                 ) {
                     Text(text = "Mostar Historial")
                 }
+                // Botón para iniciar una actividad
                 Spacer(modifier = Modifier.height(16.dp))
                 Button(
                     onClick = { /*TODO*/ },
@@ -67,6 +71,7 @@ fun HomePage(navController: NavController) {
                     Text(text = "Iniciar Actividad")
                 }
                 Spacer(modifier = Modifier.height(160.dp))
+                // Texto que permite abrir Google Maps al hacer clic
                 Text(
                     text = "Abrir Google Maps",
                     style = MaterialTheme.typography.titleLarge,

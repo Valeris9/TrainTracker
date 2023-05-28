@@ -39,12 +39,17 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
 import java.lang.Exception
+
+/**
+ * Esta función representa la vista principal del registro.
+ * Es la primera pantalla que se muestra al usuario.
+ */
 @SuppressLint("SuspiciousIndentation")
 @Composable
-
 fun LoginScreen(navController: NavController,viewModel: LoginScreenViewModel) {
     val context = LocalContext.current
     val token = "717556830084-88psc6uq5oc9l7vcs95od7vh3vo10i3s.apps.googleusercontent.com"
+    // Se utiliza rememberLauncherForActivityResult para obtener el resultado de la actividad
     val launcher = rememberLauncherForActivityResult(
 
         contract = ActivityResultContracts.StartActivityForResult()
@@ -52,12 +57,16 @@ fun LoginScreen(navController: NavController,viewModel: LoginScreenViewModel) {
         val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
         try {
             val account = task.getResult(ApiException::class.java)
+            // Iniciar sesión con las credenciales de Google y navegar a la página de inicio
+
             val credential = GoogleAuthProvider.getCredential(account.idToken, null)
             viewModel.signInWithGoogleCredential(credential) {
             navController.navigate("Homepage")
             }
         } catch (ex: Exception) {
             Log.d("TrainTracker", "GoogleSignIn falla")
+            // Manejo de la excepción en caso de falla en GoogleSignIn
+
         }
     }
 
@@ -94,6 +103,8 @@ fun LoginScreen(navController: NavController,viewModel: LoginScreenViewModel) {
                         .requestEmail()
                         .build()
                     val googleSignCliente = GoogleSignIn.getClient(context, opciones)
+                    // Iniciar el flujo de inicio de sesión con Google
+
                     launcher.launch(googleSignCliente.signInIntent)
                 }
                 .background(Color.Blue),

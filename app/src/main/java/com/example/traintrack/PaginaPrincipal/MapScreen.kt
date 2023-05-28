@@ -29,18 +29,22 @@ import java.util.jar.Manifest
 
 @Composable
 fun MapScreen() {
-    val house = LatLng(41.636253937203136,    2.299580470814943)
+    // Coordenadas de la casa en el mapa
+    val house = LatLng(41.636253937203136, 2.299580470814943)
+
+    // Estado para almacenar la posición de la cámara del mapa
     val cameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(house, 10f)
     }
 
+    // Vista de Android para mostrar el mapa
     AndroidView(
         factory = { context ->
             MapView(context).apply {
                 // Configurar el mapa
                 onCreate(null)
                 getMapAsync { googleMap ->
-                    // Configurar la API key
+                    // Configurar la API key y manejar excepciones
                     try {
                         MapsInitializer.initialize(context.applicationContext)
                     } catch (e: GooglePlayServicesNotAvailableException) {
@@ -48,7 +52,7 @@ fun MapScreen() {
                         e.printStackTrace()
                     }
 
-                    // Mostrar el mapa y el marcador
+                    // Mostrar el mapa y agregar un marcador en la posición de la casa
                     googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPositionState.position))
                     googleMap.addMarker(
                         MarkerOptions()
@@ -63,3 +67,4 @@ fun MapScreen() {
             .height(500.dp)
     )
 }
+

@@ -19,14 +19,22 @@ class LoginScreenViewModel: ViewModel() {
     private val auth: FirebaseAuth = Firebase.auth
     private val _loading = MutableLiveData(false)
 
+    /**
+     * Inicia sesión utilizando las credenciales de Google.
+     * Una vez completado el inicio de sesión, se llama a la función [home].
+     */
     @SuppressLint("SuspiciousIndentation")
     fun signInWithGoogleCredential(credential:AuthCredential, home:()->Unit)
     = viewModelScope.launch{
         try {
+            // Iniciar sesión con las credenciales proporcionadas
+
             auth.signInWithCredential(credential)
                 .addOnCompleteListener { task->
                     if(task.isSuccessful)
                     Log.d("TrainTrack", "Logueado con exito")
+                    // Llamar a la función [home] después de iniciar sesión
+
                     home()
                 }.addOnFailureListener{
                     Log.d("TrainTrack", "Fallo al loguear")
