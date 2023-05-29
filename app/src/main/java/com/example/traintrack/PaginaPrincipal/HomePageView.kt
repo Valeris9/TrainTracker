@@ -53,17 +53,19 @@ fun HomePage(navController: NavController) {
                 Spacer(modifier = Modifier.height(16.dp))
                 // Botón para mostrar el historial
                 Button(
-                    onClick = { /*TODO*/ },
+                    onClick = { navController.navigate("weather") },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(100.dp),
                 ) {
-                    Text(text = "Mostar Historial")
+                    Text(text = "Mostar Tiempo")
                 }
                 // Botón para iniciar una actividad
                 Spacer(modifier = Modifier.height(16.dp))
                 Button(
-                    onClick = { /*TODO*/ },
+                    onClick = {
+
+                    },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(100.dp),

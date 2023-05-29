@@ -17,16 +17,19 @@ import com.example.traintrack.ui.theme.TrainTrackTheme
 import com.example.traintrack.Registro.LoginScreen
 import com.example.traintrack.Registro.LoginScreenViewModel
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.Weather.WeatherViewModel
 import com.example.traintrack.PaginaPrincipal.HomePage
 import com.example.traintrack.PaginaPrincipal.MapScreen
 import com.example.traintrack.Perfil.PerfilViewModel
 import com.example.traintrack.Perfil.ProfileView
+import com.example.traintrack.Weather.WeatherScreen
 import com.google.firebase.FirebaseApp
 
 //import com.example.traintrack.Weather.WeatherScreen
@@ -60,6 +63,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun TrainTracker() {
     val navController = rememberNavController()
+    val weatherViewModel = WeatherViewModel(context = LocalContext.current)
+
     NavHost(navController = navController, startDestination = "login") {
         composable("login") { LoginScreen(navController, LoginScreenViewModel()) }
         composable("homepage") { HomePage(navController) }
@@ -68,6 +73,7 @@ fun TrainTracker() {
             perfilViewModel = PerfilViewModel(),
             navController
         )}
-        //composable("weather"){ WeatherScreen(navController)}
+        composable("weather"){ WeatherScreen(navController, weatherViewModel = weatherViewModel
+        )}
     }
 }
