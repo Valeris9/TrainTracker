@@ -54,12 +54,12 @@ fun ProfileView(
         ProfileForm(viewModel = perfilViewModel, navController)
 
         Button(
-            onClick = { navController.navigate("weather") },
+            onClick = { navController.navigate("homepage") },
             modifier = Modifier
                 .fillMaxWidth(),
             colors = ButtonDefaults.buttonColors()
         ) {
-            Text(text = "Ver tiempo", color = Color.White)
+            Text(text = "Volver atrás", color = Color.White)
         }
     }
 }

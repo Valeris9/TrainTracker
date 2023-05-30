@@ -38,9 +38,10 @@ class WeatherViewModel(context: Context) : ViewModel() {
         requestQueue.add(request)
     }
 
+    // Método para buscar una ciudad por nombre y obtener su clave de ubicación
     fun searchCityByName(cityName: String, callback: (String?) -> Unit) {
         val encodedCityName = URLEncoder.encode(cityName, "UTF-8")
-        val url = "https://api.accuweather.com/locations/v1/cities/search?apikey=$apiKey&q=$encodedCityName&language=es-es"
+        val url = "https://dataservice.accuweather.com/locations/v1/cities/search?apikey=$apiKey&q=$encodedCityName&language=es-es"
 
         val request = JsonArrayRequest(Request.Method.GET, url, null,
             { response ->
@@ -55,7 +56,7 @@ class WeatherViewModel(context: Context) : ViewModel() {
 
         requestQueue.add(request)
     }
-
+    // Método para extraer la clave de ubicación de la respuesta JSON de búsqueda de ciudad
     private fun extractLocationKey(response: JSONArray): String? {
         if (response.length() > 0) {
             val firstResult = response.optJSONObject(0)
@@ -63,6 +64,7 @@ class WeatherViewModel(context: Context) : ViewModel() {
         }
         return null
     }
+    // Método para analizar los datos del clima de la respuesta JSON y generar una cadena de detalles de clima formateada
     private fun parseWeatherData(response: JSONObject): String {
         val headline = response.optJSONObject("Headline")
         val effectiveDate = headline?.optString("EffectiveDate")
@@ -94,12 +96,14 @@ class WeatherViewModel(context: Context) : ViewModel() {
         return weatherDetails
     }
 
+    // Método para convertir temperaturas de Fahrenheit a Celsius
     private fun convertFahrenheitToCelsius(temperatureFahrenheit: Int?): Int? {
         if (temperatureFahrenheit != null) {
             return ((temperatureFahrenheit - 32) * 5) / 9
         }
         return null
     }
+
 
     companion object {
         private const val TAG = "WeatherViewModel"

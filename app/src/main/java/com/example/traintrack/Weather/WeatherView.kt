@@ -19,20 +19,28 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.Weather.WeatherViewModel
 
 @SuppressLint("UnrememberedMutableState", "SuspiciousIndentation")
 @Composable
-fun WeatherScreen(navController: NavController, weatherViewModel: WeatherViewModel) {
+fun WeatherScreen(
+    navController: NavController,
+    weatherViewModel: WeatherViewModel,
+    locationKey: String?
+) {
+    // Estado mutable para almacenar los datos del clima
     var weatherData by remember { mutableStateOf("") }
 
-    LaunchedEffect(Unit) {
-        val locationKey = "304363" // Reemplaza con la clave de ubicación correcta
-        weatherViewModel.getCurrentWeather(locationKey) { data ->
-            weatherData = data
+
+    // Efecto lanzado cuando cambia la clave de ubicación
+    LaunchedEffect(locationKey) {
+        if (locationKey != null) {
+            // Obtener el clima actual mediante el ViewModel
+            weatherViewModel.getCurrentWeather(locationKey) { data ->
+                // Asignar los datos del clima al estado mutable
+                weatherData = data
+            }
         }
     }
 
@@ -41,6 +49,7 @@ fun WeatherScreen(navController: NavController, weatherViewModel: WeatherViewMod
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        // Mostrar los datos del clima en un Texto
         Text(text = weatherData)
 
         Button(
