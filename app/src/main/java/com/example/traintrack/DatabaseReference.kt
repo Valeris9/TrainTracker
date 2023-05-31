@@ -1,5 +1,6 @@
 package com.example.traintrack
 
+import android.service.controls.ControlsProviderService.TAG
 import android.util.Log
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -62,6 +63,38 @@ class DatabaseReference {
             }
         })
     }
+
+    fun guardarPasos(pasos: HashMap<String, Any>, userId: String) {
+        // Obtener la referencia de la base de datos para el usuario actual y los pasos
+        val pasosRef = reference.child("pasos").child(userId)
+
+        // Establecer los datos de los pasos en la referencia
+        pasosRef.setValue(pasos)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Log.d(TAG, "Pasos guardados correctamente")
+                } else {
+                    Log.e(TAG, "Error al guardar los pasos", task.exception)
+                }
+            }
+    }
+
+    fun recibirPasos(userId: String, callback: (Int?) -> Unit) {
+        val stepsRef = reference.child("pasos").child(userId)
+
+        stepsRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val steps = dataSnapshot.getValue(Int::class.java)
+                callback(if (steps != null) steps else 0)
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.e(TAG, "Error al recibir los pasos desde Firebase: ${databaseError.message}")
+                callback(null)
+            }
+        })
+    }
+
 
 
 }

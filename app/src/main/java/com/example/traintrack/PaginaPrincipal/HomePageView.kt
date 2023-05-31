@@ -64,7 +64,7 @@ fun HomePage(navController: NavController) {
                 Spacer(modifier = Modifier.height(16.dp))
                 Button(
                     onClick = {
-
+                        navController.navigate("fitness")
                     },
                     modifier = Modifier
                         .fillMaxWidth()
@@ -72,6 +72,18 @@ fun HomePage(navController: NavController) {
                     ) {
                     Text(text = "Iniciar Actividad")
                 }
+                Spacer(modifier = Modifier.height(16.dp))
+                Button(
+                    onClick = {
+                        navController.navigate("calcular")
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(100.dp),
+                ) {
+                    Text(text = "Métricas")
+                }
+
                 Spacer(modifier = Modifier.height(160.dp))
                 // Texto que permite abrir Google Maps al hacer clic
                 Text(

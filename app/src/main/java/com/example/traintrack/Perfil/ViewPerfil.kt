@@ -2,25 +2,24 @@ package com.example.traintrack.Perfil
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import com.example.traintrack.Actividad.ActivityViewModel
 import kotlin.reflect.KProperty
 
 @Composable
 fun ProfileView(
     perfilViewModel: PerfilViewModel,
-    navController: NavController
+    navController: NavHostController,
 ) {
     // Recopilar el estado del perfilData del PerfilViewModel
     val perfilData by perfilViewModel.perfilData.collectAsState()
@@ -28,8 +27,7 @@ fun ProfileView(
     // Obtener el perfil al cargar la vista
     perfilViewModel.obtenerPerfil()
 
-
-
+    Spacer(modifier = Modifier.height(16.dp))
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -45,9 +43,9 @@ fun ProfileView(
             Text(text = "Peso: ${perfilData!!["peso"]} kg")
         }
 
+        Spacer(modifier = Modifier.height(20.dp))
 
         Spacer(modifier = Modifier.height(50.dp))
-
 
         // Formulario para editar el perfil
         Text(text = "Modificar Perfil: ")

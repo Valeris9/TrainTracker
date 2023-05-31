@@ -28,13 +28,25 @@ import java.util.jar.Manifest
 
 
 @Composable
-fun MapScreen() {
-    // Coordenadas de la casa en el mapa
-    val house = LatLng(41.636253937203136, 2.299580470814943)
+fun MapScreen(mapViewModel: MapViewModel) {
 
     // Estado para almacenar la posición de la cámara del mapa
     val cameraPositionState = rememberCameraPositionState {
-        position = CameraPosition.fromLatLngZoom(house, 10f)
+        position = CameraPosition.fromLatLngZoom(LatLng(0.0, 0.0), 10f)
+    }
+
+    val context = LocalContext.current
+
+    // Inicializar el cliente de ubicación en el ViewModel
+    LaunchedEffect(Unit) {
+        mapViewModel.initLocationClient(context)
+    }
+
+    // Obtener las coordenadas del dispositivo y actualizar la posición de la cámara
+    LaunchedEffect(Unit) {
+        mapViewModel.getCurrentLocation { currentLatLng ->
+            cameraPositionState.position = CameraPosition.fromLatLngZoom(currentLatLng, 10f)
+        }
     }
 
     // Vista de Android para mostrar el mapa
@@ -52,19 +64,11 @@ fun MapScreen() {
                         e.printStackTrace()
                     }
 
-                    // Mostrar el mapa y agregar un marcador en la posición de la casa
+                    // Mostrar el mapa y mover la cámara a la posición actual
                     googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPositionState.position))
-                    googleMap.addMarker(
-                        MarkerOptions()
-                            .position(house)
-                            .title("Casa")
-                            .snippet("Casa Victor")
-                    )
                 }
             }
         },
-        modifier = Modifier.fillMaxWidth()
-            .height(500.dp)
+        modifier = Modifier.fillMaxSize()
     )
 }
-
