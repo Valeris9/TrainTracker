@@ -13,11 +13,13 @@ import com.google.android.gms.maps.model.LatLng
 class MapViewModel : ViewModel() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
+    // Inicializa el cliente de ubicación
     @SuppressLint("MissingPermission")
     fun initLocationClient(context: Context) {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
     }
 
+    // Obtiene la ubicación actual del usuario
     @SuppressLint("MissingPermission")
     fun getCurrentLocation(callback: (LatLng) -> Unit) {
         fusedLocationClient.lastLocation.addOnSuccessListener { location ->

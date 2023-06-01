@@ -21,6 +21,11 @@ class FitnessApi(private val activity: Activity) {
             .build()
     }
 
+    /**
+     * Solicita permiso para acceder a los datos de actividad física del usuario.
+     * @param activity Actividad actual.
+     * @param callback Función de retorno que se llama cuando se otorgan los permisos.
+     */
     fun requestPermission(activity: Activity, callback: () -> Unit) {
         if (!GoogleSignIn.hasPermissions(GoogleSignIn.getLastSignedInAccount(activity), fitnessOptions)) {
             GoogleSignIn.requestPermissions(
@@ -30,11 +35,17 @@ class FitnessApi(private val activity: Activity) {
                 fitnessOptions
             )
         } else {
-            // Permission already granted
+            // Permiso ya otorgado
             callback.invoke()
         }
     }
 
+    /**
+     * Lee el número total de pasos del usuario.
+     * @param activity Actividad actual.
+     * @param callback Función de retorno que se llama cuando se obtienen los pasos.
+     *                 Recibe el número total de pasos como parámetro.
+     */
     fun readSteps(activity: Activity, callback: (Int) -> Unit) {
         val calendar = Calendar.getInstance()
         calendar.time = Date()
@@ -70,6 +81,20 @@ class FitnessApi(private val activity: Activity) {
                     callback.invoke(0)
                 }
         }
+    }
+
+    /**
+     * Calcula las calorías quemadas en base al número de pasos y el peso del usuario.
+     * @param steps Número de pasos.
+     * @param weight Peso del usuario.
+     * @return Calorías quemadas.
+     */
+    fun calculateCaloriesBurned(steps: Int, weight: Float): Float {
+        // Fórmula para calcular las calorías quemadas en base a los pasos y el peso
+        val caloriesPerStep = 0.05f // Número de calorías quemadas por cada paso
+        val caloriesBurned = steps * caloriesPerStep * weight
+
+        return caloriesBurned
     }
 
     companion object {

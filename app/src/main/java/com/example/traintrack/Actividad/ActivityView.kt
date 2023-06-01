@@ -37,13 +37,14 @@ fun ActivityView(activityViewModel: ActivityViewModel, navController: NavControl
             style = MaterialTheme.typography.bodySmall,
             modifier = Modifier.padding(bottom = 16.dp)
         )
-
+        // Recuperar los pasos realizados por el usuario usando el ViewModel
         LaunchedEffect(Unit) {
             activityViewModel.getSteps { steps ->
                 stepsState.value = steps
             }
         }
 
+        // Campo de texto para añadir pasos
         TextField(
             value = stepsToAddState.value,
             onValueChange = { newValue ->
@@ -53,6 +54,7 @@ fun ActivityView(activityViewModel: ActivityViewModel, navController: NavControl
             modifier = Modifier.padding(bottom = 16.dp)
         )
 
+        // Botón para navegar hacia atrás
         Button(
             onClick = {
                 navController.navigate("homepage")
@@ -62,6 +64,7 @@ fun ActivityView(activityViewModel: ActivityViewModel, navController: NavControl
             Text(text = "Atrás")
         }
 
+        // Botón para guardar los pasos en Firebase
         Button(
             onClick = {
                 val stepsToAdd = stepsToAddState.value.toIntOrNull()
@@ -74,6 +77,7 @@ fun ActivityView(activityViewModel: ActivityViewModel, navController: NavControl
         ) {
             Text(text = "Guardar pasos")
         }
+        Spacer(modifier = Modifier.height(50.dp))
         Canvas(
             modifier = Modifier.size(200.dp)
         ) {

@@ -13,7 +13,6 @@ class DatabaseReference {
     private val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     private val reference: DatabaseReference = database.reference
 
-
     /**
      * Guarda los datos del perfil en la base de datos.
      * @param perfilData Datos del perfil a guardar.
@@ -64,6 +63,11 @@ class DatabaseReference {
         })
     }
 
+    /**
+     * Guarda los datos de los pasos en la base de datos.
+     * @param pasos Datos de los pasos a guardar.
+     * @param userId ID del usuario al que pertenecen los pasos.
+     */
     fun guardarPasos(pasos: HashMap<String, Any>, userId: String) {
         // Obtener la referencia de la base de datos para el usuario actual y los pasos
         val pasosRef = reference.child("pasos").child(userId)
@@ -79,6 +83,12 @@ class DatabaseReference {
             }
     }
 
+    /**
+     * Recibe los datos de los pasos desde la base de datos.
+     * @param userId ID del usuario al que pertenecen los pasos.
+     * @param callback Función de retorno que se llama cuando se reciben los datos de los pasos.
+     *                 Recibe los pasos como parámetro (puede ser nulo si no se encuentran datos).
+     */
     fun recibirPasos(userId: String, callback: (Int?) -> Unit) {
         val stepsRef = reference.child("pasos").child(userId)
 
@@ -94,7 +104,4 @@ class DatabaseReference {
             }
         })
     }
-
-
-
 }

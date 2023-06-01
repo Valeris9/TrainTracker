@@ -21,6 +21,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.app.ActivityCompat
+import androidx.navigation.NavController
 
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -116,7 +117,7 @@ fun TrainTracker() {
                 }
             }
         }
-        composable("calcular"){ MetricsView(caloriesBurned = 1000, distance = 120.0, steps = 12000 )}
+        composable("calcular"){ MetricsView(distance = 120.0, steps = 12000 , navController)}
 
     }
 }

@@ -54,5 +54,18 @@ fun SelectCityView(navController: NavController, weatherViewModel: WeatherViewMo
         ) {
             Text(text = "Buscar")
         }
+
+        Button(
+            onClick = {
+                navController.navigate("homepage")
+
+            }
+        ){
+            Text(text = "Atrás")
+        }
+
+
+
+
     }
 }

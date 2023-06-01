@@ -53,6 +53,15 @@ fun WeatherScreen(
         Text(text = weatherData)
 
         Button(
+            onClick = {
+                navController.navigate("selectcity")
+
+            }
+        ){
+            Text(text = "Seleccionar otra ciudad")
+        }
+
+        Button(
             onClick = { navController.navigate("perfil") },
             modifier = Modifier
                 .padding(top = 16.dp)
@@ -61,5 +70,10 @@ fun WeatherScreen(
         ) {
             Text(text = "Ir al perfil", color = Color.White)
         }
+
     }
+
+
+
+
 }
