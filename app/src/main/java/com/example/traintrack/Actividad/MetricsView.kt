@@ -24,7 +24,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 
 @Composable
-fun MetricsView( distance: Double, steps: Int, navController : NavController) {
+fun MetricsView(weight: Float ,calories: Float,distance: Double, steps: Int, navController : NavController) {
     Column(
         modifier = Modifier.padding(16.dp)
     ) {
@@ -41,7 +41,9 @@ fun MetricsView( distance: Double, steps: Int, navController : NavController) {
             )
         }
 
-        val caloriesBurned: MutableState<Int> = remember { mutableStateOf(0) }
+        //EJEMPLO DE COMO SE CALCULARIA LAS CALORIAS, SIN LLAMADA A LA API:
+        //SUPONEMOS UN PESO DE 75KG.
+        var caloriesBurned = steps * 0.05f * weight
 
         /**
              Aquí, en lugar de hardcodear las calorias se podrian recibir así si pudiesemos usar la

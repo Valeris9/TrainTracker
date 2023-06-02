@@ -48,7 +48,7 @@ fun ProfileView(
         Spacer(modifier = Modifier.height(50.dp))
 
         // Formulario para editar el perfil
-        Text(text = "Modificar Perfil: ")
+        Text(text = "Modificar Perfil: (LLena todos los campos) ")
         ProfileForm(viewModel = perfilViewModel, navController)
 
         Button(

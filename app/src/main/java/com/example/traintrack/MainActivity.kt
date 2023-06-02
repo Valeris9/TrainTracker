@@ -117,7 +117,7 @@ fun TrainTracker() {
                 }
             }
         }
-        composable("calcular"){ MetricsView(distance = 120.0, steps = 12000 , navController)}
+        composable("calcular"){ MetricsView(weight = 75.0f, calories = 400f,distance = 120.0, steps = 12000 ,navController)}
 
     }
 }
