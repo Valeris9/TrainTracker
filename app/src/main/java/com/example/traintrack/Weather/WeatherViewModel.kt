@@ -15,7 +15,7 @@ import org.json.JSONObject
 import java.net.URLEncoder
 
 class WeatherViewModel(context: Context) : ViewModel() {
-    private val apiKey = "X7UPRl8FY8Hkip965ss4rghTdsx4pz1t"
+    private val apiKey = "deleted"
     private val requestQueue: RequestQueue = Volley.newRequestQueue(context)
 
     // Método para obtener el clima actual basado en la ubicación actual del dispositivo
